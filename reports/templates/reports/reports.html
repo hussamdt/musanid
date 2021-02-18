@@ -1,0 +1,56 @@
+{% extends 'reports/base.html' %}
+{% load static %}
+{% block 'content' %}
+<h1 class="h3 mb-2 text-gray-800">All Reports</h1>
+                    <p></p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Alert Name</th>
+                                            <th>Priorty</th>
+                                            <th>Malware Family</th>
+                                            <th>Http Hostname</th>
+                                            <th>Country</th>
+                                            <th>Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Alert Name</th>
+                                            <th>Priorty</th>
+                                            <th>Malware Family</th>
+                                            <th>Http Hostname</th>
+                                            <th>Country</th>
+                                            <th>Time</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for report in reports %}
+										
+										<tr>
+                                            <td><a href="single/{{report.id}}"> {{ report.alert_name }} </a></td>
+                                            <td>{{ report.priorty }}</td>
+                                            <td>{{ report.malaware_family }}</td>
+                                            <td>{{ report.http_hostname }}</td>
+                                            <td>{{ report.src_country }}</td>
+                                            <td>{{ report.time }}</td>
+                                        </tr>
+									{% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+					
+
+{% endblock %}
+
+

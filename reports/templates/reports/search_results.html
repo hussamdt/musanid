@@ -1,0 +1,13 @@
+{% extends 'reports/base.html' %}
+
+
+{% block 'content' %}
+	
+<div class="card mb-3 text-center">
+	<div class="card-body">
+		{{ results|safe }}
+	</div>
+	<div class="card-footer"><a href="/reports">Back to Dashboard.</a></div>
+</div>
+
+{% endblock %}

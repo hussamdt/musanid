@@ -1,0 +1,271 @@
+{% extends 'reports/base.html' %}
+
+
+{% block 'content' %}
+<div class="container mb-3">
+	<div class="row">
+		<div class="col-2">
+			<a href="/reports/all" class="btn btn-primary btn-icon-split btn-sm">
+                <span class="icon text-white-50">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">Back</span>
+            </a>
+		</div>
+		
+		<div class="col-10 text-right">			
+			
+			{% if request.user.is_staff %}
+				{% if report.generated_url == '' %}
+					<span id="generate_url_container">
+					<input type="hidden" id="report_id" value="{{ report.id }}" />
+					<input type="hidden" id="csrf" value="{{ csrf_token }}" />
+					<a href="#" id="generateUrl" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate URL</a>
+					</span>
+				{% else %}
+					<a href="#" id="copy_btn" class="btn btn-dark btn-icon-split btn-sm"><span class="text">Copy URL</span></a>
+					<a href="{{ report.generated_url }}" id="generated_url" target="_blank" class="border">{{ report.generated_url }}</a>
+				{% endif %}
+			{% endif %}
+			
+			<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate PDF</a>
+			
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<!-- Collapsable Card -->
+	<div class="card shadow mb-4">
+		<!-- Card Header - Accordion -->
+		<a href="#AlertInfo" class="d-block card-header py-3" data-toggle="collapse"
+			role="button" aria-expanded="true" aria-controls="AlertInfo">
+			<h6 class="m-0 font-weight-bold text-primary">Alert Information</h6>
+		</a>
+		<!-- Card Content - Collapse -->
+		<div class="collapse show" id="AlertInfo">
+			<div class="card-body">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Alert Type</th>
+							<td>{{ report.alert_type }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Alert Name</th>
+							<td>{{ report.alert_name }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Priorty</th>
+							<td>{{ report.priorty }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Malaware Family</th>
+							<td>{{ report.malaware_family }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Time</th>
+							<td>{{ report.time }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">HTTP Hostname</th>
+							<td>{{ report.http_hostname }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Reference URL</th>
+							<td>{{ report.reference_url }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- Collapsable Card -->
+	
+	
+	<!-- Collapsable Card -->
+	<div class="card shadow mb-4">
+		<!-- Card Header - Accordion -->
+		<a href="#SourceInformation" class="d-block card-header py-3" data-toggle="collapse"
+			role="button" aria-expanded="true" aria-controls="SourceInformation">
+			<h6 class="m-0 font-weight-bold text-primary">Source Information</h6>
+		</a>
+		<!-- Card Content - Collapse -->
+		<div class="collapse show" id="SourceInformation">
+			<div class="card-body">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Attack Reference</th>
+							<td>{{ report.attack_reference }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Source Hostname</th>
+							<td>{{ report.src_hostname }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Source IP Address</th>
+							<td>{{ report.src_ip }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Source Country</th>
+							<td>{{ report.src_country }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- Collapsable Card -->
+	
+	
+	<!-- Collapsable Card -->
+	<div class="card shadow mb-4">
+		<!-- Card Header - Accordion -->
+		<a href="#DestinationInformation" class="d-block card-header py-3" data-toggle="collapse"
+			role="button" aria-expanded="true" aria-controls="DestinationInformation">
+			<h6 class="m-0 font-weight-bold text-primary">Destination Information</h6>
+		</a>
+		<!-- Card Content - Collapse -->
+		<div class="collapse show" id="DestinationInformation">
+			<div class="card-body">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Destination IP Address</th>
+							<td>{{ report.dst_ip }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Destination Country</th>
+							<td>{{ report.dst_country }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Destination Hostname</th>
+							<td>{{ report.dst_hostname }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- Collapsable Card -->
+	
+	
+	
+	<!-- Collapsable Card -->
+	<div class="card shadow mb-4">
+		<!-- Card Header - Accordion -->
+		<a href="#Recommendation" class="d-block card-header py-3" data-toggle="collapse"
+			role="button" aria-expanded="true" aria-controls="Recommendation">
+			<h6 class="m-0 font-weight-bold text-primary">Recommendation & Description</h6>
+		</a>
+		<!-- Card Content - Collapse -->
+		<div class="collapse show" id="Recommendation">
+			<div class="card-body">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Recommendation</th>
+							<td><p>{{ report.recommendation|linebreaksbr }}</p></td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Description</th>
+							<td><p> {{ report.description|linebreaksbr }} </p></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- Collapsable Card -->
+	
+	
+	
+	<!-- Collapsable Card -->
+	<div class="card shadow mb-4">
+		<!-- Card Header - Accordion -->
+		<a href="#Others" class="d-block card-header py-3" data-toggle="collapse"
+			role="button" aria-expanded="true" aria-controls="Others">
+			<h6 class="m-0 font-weight-bold text-primary">Others</h6>
+		</a>
+		<!-- Card Content - Collapse -->
+		<div class="collapse show" id="Others">
+			<div class="card-body">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Other TLS subject</th>
+							<td>{{ report.other_tls_subject }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Other TLS fingerprint</th>
+							<td>{{ report.other_tls_fingerprint }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Other username</th>
+							<td>{{ report.other_username }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Other source NT domain</th>
+							<td>{{ report.other_source_nt_domain }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Other destination asset</th>
+							<td>{{ report.other_destination_asset }}</td>
+						</tr>
+						<tr>
+							<th scope="row" class="bg-light" style="width:17%;">Other</th>
+							<td>{{ report.other }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- Collapsable Card -->
+	
+	
+</div>
+
+<script>
+
+var generateUrl = document.getElementById('generateUrl');
+var generate_url_container = document.getElementById('generate_url_container');
+
+//var url = ;
+var copy_btn = document.getElementById('copy_btn');
+ 
+if(generateUrl != null){
+	generateUrl.onclick = function(){
+		var report_id =document.getElementById('report_id').value;
+		var csrf_token =document.getElementById('csrf').value;
+		params = "report_id="+report_id +"&csrfmiddlewaretoken="+ csrf_token;
+		httpx = new XMLHttpRequest();
+		
+		httpx.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				generate_url_container.innerHTML= "<a href='#' id='copy' class='btn btn-dark btn-icon-split btn-sm'><span class='text'>Copy URL</span></a> :<a id='generated_url' href='"+ httpx.responseText +"' target='_blank'>" + httpx.responseText + "</a>";
+			}
+		};
+		
+		httpx.open("POST", "/reports/generate_url");
+		httpx.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		httpx.send(params);
+		
+		
+	};
+}
+
+if(copy_btn != null){
+	copy_btn.onclick = function(){
+		var r = document.createRange();
+		r.selectNode(document.getElementById('generated_url'));
+		window.getSelection().removeAllRanges();
+		window.getSelection().addRange(r);
+		document.execCommand('copy');
+		window.getSelection().removeAllRanges();
+	};
+}
+</script>
+
+{% endblock %}

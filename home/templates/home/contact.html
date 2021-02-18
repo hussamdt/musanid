@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+
+{% block 'content' %}
+
+<div class="wrapper">
+
+	<div class="container mt-4">
+		
+	<!--Section: Contact v.2-->
+	<section class="mb-4">
+
+    <!--Section heading-->
+    <h3 class="h1-responsive font-weight-bold text-center my-2">Contact us</h3>
+    <!--Section description-->
+    <p class="w-responsive mx-auto mb-1">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+        a matter of hours to help you.</p>
+
+    <div class="row">
+
+        <!--Grid column-->
+        <div class="col-md-9 mb-md-0 mb-5">
+            
+			<form action="contact-us" method="post">
+				{% csrf_token %}
+				<table class="table table-borderless">
+					{{ form }}
+					
+					<tr>
+						<td></td>
+						<td><button type="submit" class="btn btn-primary btn-lg form-control" >Send</button></td>
+					</tr>
+				</table>
+			</form>
+			
+            
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-3 text-center">
+            <ul class="list-unstyled mb-0">
+                <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                    <p>San Francisco, CA 94126, USA</p>
+                </li>
+
+                <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                    <p>+ 01 234 567 89</p>
+                </li>
+
+                <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                    <p>contact@mdbootstrap.com</p>
+                </li>
+            </ul>
+        </div>
+        <!--Grid column-->
+
+    </div>
+
+</section>
+<!--Section: Contact v.2-->
+		
+	</div>
+
+</div>
+
+{% endblock %}

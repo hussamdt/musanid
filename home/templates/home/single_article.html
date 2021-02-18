@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block 'content' %}
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+        <h1 class="mt-4">{{article.title}}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+          By: {{ article.username }}
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Created on: {{ article.create_date }}</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="../media/{{article.image_url}}" alt="">
+
+        <hr>
+
+        <!-- Post Content -->
+        <p>{{ article.content|safe|escape }}</p>
+
+        <hr>
+	</div>
+    {% block 'comments' %}
+		{# {% include './includes/comments_section.html' %} #}
+	{% endblock %}
+
+
+	{% block 'sidebar'%}
+		{% include './includes/side_bar.html' %}
+	{% endblock %}
+	
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

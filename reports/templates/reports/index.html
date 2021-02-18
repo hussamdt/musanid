@@ -1,0 +1,23 @@
+{% extends 'reports/base.html' %}
+
+
+{% block 'content' %}
+
+<!-- Content Row -->
+{% block 'top_statistic'  %}
+	{% include './includes/top_statistic.html' %}
+{% endblock %}
+
+<!-- Content Row -->
+{% block 'middle_statistic' %}
+	{% include './includes/middle_statistic.html' %}
+{% endblock %}
+
+<!-- Content Row -->
+{% comment %}
+{% block 'bottom_statistic' %}
+	{% include './includes/bottom_statistic.html' %}
+{% endblock %}
+{% endcomment %}
+
+{% endblock %}
