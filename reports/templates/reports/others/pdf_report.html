@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{{ alert.alert_name }}</title>
+</head>
+
+<style>
+.table td, .table th {
+  padding: .75rem;
+  vertical-align: top;
+  text-align: left;
+  border-top: 1px solid #e3e6f0;
+}
+
+.table th{
+    background-color: #f8f9fc!important;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #858796;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+body {
+  margin: 0;
+  font-family: Nunito,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #858796;
+  text-align: left;
+  background-color: #fff;
+}
+
+:root {
+  --blue: #4e73df;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #e74a3b;
+  --orange: #fd7e14;
+  --yellow: #f6c23e;
+  --green: #1cc88a;
+  --teal: #20c9a6;
+  --cyan: #36b9cc;
+  --white: #fff;
+  --gray: #858796;
+  --gray-dark: #5a5c69;
+  --primary: #4e73df;
+  --secondary: #858796;
+  --success: #1cc88a;
+  --info: #36b9cc;
+  --warning: #f6c23e;
+  --danger: #e74a3b;
+  --light: #f8f9fc;
+  --dark: #5a5c69;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: "Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.card-header:first-child {
+  border-radius: calc(.35rem - 1px) calc(.35rem - 1px) 0 0;
+}
+
+.pb-3, .py-3 {
+  padding-bottom: 1rem!important;
+}
+
+.card-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background-color: #95aefa;
+  border-bottom: 1px solid #e3e6f0;
+  color: #46464d;
+}
+
+.header{
+    margin-left: 30px;
+}
+</style>
+
+<body id="page-top">
+    
+    <div class="header">
+        <h2><u>Musanid - <small>keep you secure</small></u></h2>
+        <h5>Date: {{ date }}</h5>
+        <h5>Alret from report: {{ alert.report.report_name }}</h5>
+    </div>
+
+    <hr>
+    <div class="container">
+        <!-- Collapsable Card -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Accordion -->
+            <h6 class="m-0 font-weight-bold text-primary card-header">Alert Information</h6>
+            <!-- Card Content - Collapse -->
+            <div class="collapse show" id="AlertInfo">
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="width:17%;">Alert Type</th>
+                                <td>{{ alert.alert_type }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;">Alert Name</th>
+                                <td>{{ alert.alert_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;">Priorty</th>
+                                <td>{{ alert.priorty }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;">Malaware Family</th>
+                                <td>{{ alert.malaware_family }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Time</th>
+                                <td>{{ alert.time }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">HTTP Hostname</th>
+                                <td>{{ alert.http_hostname }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Reference URL</th>
+                                <td>{{ alert.reference_url }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Collapsable Card -->
+        
+        
+        <!-- Collapsable Card -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Accordion -->
+            <h6 class="m-0 font-weight-bold text-primary card-header">Source Information</h6>
+            <!-- Card Content - Collapse -->
+            <div class="collapse show" id="SourceInformation">
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Attack Reference</th>
+                                <td>{{ alert.attack_reference }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Source Hostname</th>
+                                <td>{{ alert.src_hostname }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Source IP Address</th>
+                                <td>{{ alert.src_ip }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Source Country</th>
+                                <td>{{ alert.src_country }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Collapsable Card -->
+
+        <!-- Collapsable Card -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Accordion -->
+            <h6 class="m-0 font-weight-bold text-primary card-header">Destination Information</h6>
+            <!-- Card Content - Collapse -->
+            <div class="collapse show" id="DestinationInformation">
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Destination IP Address</th>
+                                <td>{{ alert.dst_ip }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Destination Country</th>
+                                <td>{{ alert.dst_country }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Destination Hostname</th>
+                                <td>{{ alert.dst_hostname }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Collapsable Card -->
+        
+        
+        <!-- Collapsable Card -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Accordion -->
+            <h6 class="m-0 font-weight-bold text-primary card-header">Recommendation & Description</h6>
+            <!-- Card Content - Collapse -->
+            <div class="collapse show" id="Recommendation">
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Recommendation</th>
+                                <td><p>{{ alert.recommendation|linebreaksbr }}</p></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Description</th>
+                                <td><p> {{ alert.description|linebreaksbr }} </p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Collapsable Card -->
+        
+        
+        <!-- Collapsable Card -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Accordion -->
+            <h6 class="m-0 font-weight-bold text-primary card-header">Others</h6>
+            <!-- Card Content - Collapse -->
+            <div class="collapse show" id="Others">
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Other TLS subject</th>
+                                <td>{{ alert.other_tls_subject }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Other TLS fingerprint</th>
+                                <td>{{ alert.other_tls_fingerprint }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Other username</th>
+                                <td>{{ alert.other_username }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Other source NT domain</th>
+                                <td>{{ alert.other_source_nt_domain }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Other destination asset</th>
+                                <td>{{ alert.other_destination_asset }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width:17%;" style="width:17%;">Other</th>
+                                <td>{{ alert.other }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Collapsable Card -->
+
+        <br>
+    </div>
+            <footer style="text-align: center;">
+                <div style=" padding-top: 30px;">
+                    <div class="text-center my-auto copyright"><span>Copyright © Musanid {{ date.year }}</span></div>
+                </div>
+            </footer>
+    </div>
+
+</body>
+
+</html>

@@ -80,6 +80,14 @@ WSGI_APPLICATION = 'faisal.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3'
+    }
+}
+
+"""
+DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'reporter_db',
         'USER': 'postgres',
@@ -88,6 +96,7 @@ DATABASES = {
         'PORT': '3306'
     }
 }
+"""
 
 
 # Email Settings

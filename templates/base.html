@@ -21,7 +21,7 @@ Coded by www.creative-tim.com
   <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
   <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
   <title>
-    Fisal Reporter - {{title}}
+    Musanid.com - {{title}}
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
@@ -112,14 +112,14 @@ Coded by www.creative-tim.com
 				  <span class="nav-link-inner--text">Account</span>
 				</a>
 				<div class="dropdown-menu">
-				  <a href="/" class="dropdown-item">Home</a>
+				  <a href="{% url 'home:home' %}" class="dropdown-item">Home</a>
 				  {% if not request.user.is_authenticated %}
-				  <a href="{% url 'login' %}" class="dropdown-item">Login</a>
+				  <a href="{% url 'home:login' %}" class="dropdown-item">Login</a>
 				  <a href="#" class="dropdown-item">Register</a>
 				  {% else %}
 				  <a href="#" class="dropdown-item">Profile</a>
-				  <a href="/reports" class="dropdown-item">Your Reports</a>
-				  <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+				  <a href="{% url 'reports:index' %}" class="dropdown-item">Your Reports</a>
+				  <a href="{% url 'home:logout' %}" class="dropdown-item">Logout</a>
 				  {% endif %}
 				  {% if request.user.is_superuser or request.user.is_staff %}
 				  <a href="/admin" class="dropdown-item">Admin Panel</a>
@@ -127,7 +127,7 @@ Coded by www.creative-tim.com
 				</div>
 			  </li>
 			  
-			  <a href="{% url 'contact' %}" class="nav-link" href="#" role="button">
+			  <a href="{% url 'home:contact' %}" class="nav-link" role="button">
 				  <i class="ni ni-collection d-lg-none"></i>
 				  <span >Contact us</span>
 				</a>
@@ -196,13 +196,13 @@ Coded by www.creative-tim.com
         <div class="row align-items-center justify-content-md-between">
           <div class="col-md-6">
             <div class="copyright">
-              &copy; 2020 <a href="" target="_blank">Mr. Faisal (copy right need to be edited)</a>.
+              <span>Copyright &copy; Musanid 2021</span>
             </div>
           </div>
           <div class="col-md-6">
             <ul class="nav nav-footer justify-content-end">
               <li class="nav-item">
-                <a href="/" class="nav-link" target="_blank">Home</a>
+                <a href="{% url 'home:home' %}" class="nav-link">Home</a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link" target="_blank">About Us</a>

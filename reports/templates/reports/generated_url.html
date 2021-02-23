@@ -1,0 +1,142 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{{ report.report_name }}</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'reports/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'reports/css/sb-admin-2.min.css' %}" rel="stylesheet">
+	
+	<link href="{% static 'reports/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+	
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <div class="d-flex flex-column pt-5" id="content-wrapper">
+            <div id="content">
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">{{ report.report_name }}</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 font-weight-bold">Alerts</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label>Show <select class="form-control form-control-sm custom-select custom-select-sm">
+                                                <option value="10" selected>10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select></label></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search" /></label></div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Alert Name</th>
+                                            <th>Priorty</th>
+                                            <th>Malware Family</th>
+                                            <th>Http Hostname</th>
+                                            <th>Country</th>
+                                            <th>Time</th>
+                                            <th>PDF</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Alert Name</th>
+                                            <th>Priorty</th>
+                                            <th>Malware Family</th>
+                                            <th>Http Hostname</th>
+                                            <th>Country</th>
+                                            <th>Time</th>
+                                            <th>PDF</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for alert in report.alert_set.all %}
+										
+										<tr>
+                                            <td><a href="{% url 'reports:by-generated-url-alert' report.generated_url alert.id %}"> {{ alert.alert_name }} </a></td>
+                                            <td>{{ alert.priorty }}</td>
+                                            <td>{{ alert.malaware_family }}</td>
+                                            <td>{{ alert.http_hostname }}</td>
+                                            <td>{{ alert.src_country }}</td>
+                                            <td>{{ alert.time }}</td>
+                                            <td>
+                                                <a href="{% url 'reports:pdf-by-generated-url' alert.report.generated_url alert.id %}?download=true" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i></a>
+			                                    <hr>
+                                                <a href="{% url 'reports:pdf-by-generated-url' alert.report.generated_url alert.id %}?download=false" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-eye fa-sm text-white-50"></i></a>
+                                            </td>
+                                        </tr>
+									{% endfor %}
+                                    </tbody>
+                                </table>                            </div>
+                            <div class="row">
+                                <div class="col-md-6 align-self-center">
+                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                        <ul class="pagination">
+                                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Musanid 2021</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'reports/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'reports/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'reports/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'reports/js/sb-admin-2.min.js' %}"></script>
+
+	
+	<!-- dataTable scripts -->
+	<script src="{% static 'reports/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+	<script src="{% static 'reports/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+	<!-- <script src="{% static 'reports/js/demo/datatables-demo.js' %}"></script> -->
+
+</body>
+
+</html>

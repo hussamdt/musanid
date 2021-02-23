@@ -1,0 +1,134 @@
+{% extends 'reports/base.html' %}
+{% load static %}
+{% block 'content' %}
+<h1 class="h3 mb-2 text-gray-800">Alerts in report {{ report.report_name }}</h1>
+                    <p></p>
+                <div class="row">
+                    <div class="col">
+                    <a href="{% url 'reports:list' %}" class="btn btn-primary btn-icon-split btn-sm mb-3">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                        <span class="text">Back</span>
+                    </a>
+                    </div>
+                    <div class="col">
+                        {% if request.user.is_staff %}
+                        {% if report.generated_url == '' %}
+                        <span id="generate_url_container">
+                        <input type="hidden" id="report_id" value="{{ report.id }}" />
+                        <input type="hidden" id="csrf" value="{{ csrf_token }}" />
+                        <a href="#" id="generateUrl" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate URL</a>
+                        </span>
+                        {% else %}
+                        <a href="#" id="copy_btn" class="btn btn-dark btn-icon-split btn-sm"><span class="text">Copy URL</span></a>
+                        <a href="{% url 'reports:by-generated-url' report.generated_url %}" id="generated_url" target="_blank" class="border">{{ request.get_host }}/reports/url/{{ report.generated_url}} </a>
+                        {% endif %}
+                        {% endif %}
+
+                    </div>
+                
+                </div>
+                    
+                    
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Reort : {{ report.report_name }} {{ report.created_at }}</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Alert Name</th>
+                                            <th>Priorty</th>
+                                            <th>Malware Family</th>
+                                            <th>Http Hostname</th>
+                                            <th>Country</th>
+                                            <th>Time</th>
+                                            <td>PDF</td>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Alert Name</th>
+                                            <th>Priorty</th>
+                                            <th>Malware Family</th>
+                                            <th>Http Hostname</th>
+                                            <th>Country</th>
+                                            <th>Time</th>
+                                            <th>PDF</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for alert in report.alert_set.all %}
+										
+										<tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td><a href="{% url 'reports:single-alert' report.id alert.id %}"> {{ alert.alert_name }} </a></td>
+                                            <td>{{ alert.priorty }}</td>
+                                            <td>{{ alert.malaware_family }}</td>
+                                            <td>{{ alert.http_hostname }}</td>
+                                            <td>{{ alert.src_country }}</td>
+                                            <td>{{ alert.time }}</td>
+                                            <td>
+                                                <a href="{% url 'reports:generate-pdf' alert.id %}?download=true" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i></a>
+			                                    <hr>
+                                                <a href="{% url 'reports:generate-pdf' alert.id %}?download=false" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-eye fa-sm text-white-50"></i></a>
+                                            </td>
+                                        </tr>
+									{% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+					
+<script>
+
+    var generateUrl = document.getElementById('generateUrl');
+    var generate_url_container = document.getElementById('generate_url_container');
+    
+    //var url = ;
+    var copy_btn = document.getElementById('copy_btn');
+        
+    if(generateUrl != null){
+        generateUrl.onclick = function(){
+            var report_id =document.getElementById('report_id').value;
+            var csrf_token =document.getElementById('csrf').value;
+            params = "report_id="+report_id +"&csrfmiddlewaretoken="+ csrf_token;
+            httpx = new XMLHttpRequest();
+            
+            httpx.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    generate_url_container.innerHTML= "<a href='#' id='copy' class='btn btn-dark btn-icon-split btn-sm'><span class='text'>Copy URL</span></a> :<a id='generated_url' href='"+ httpx.responseText +"' target='_blank'>" + httpx.responseText + "</a>";
+                }
+            };
+            
+            httpx.open("POST", "/reports/generate_url");
+            httpx.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            httpx.send(params);
+            
+            
+        };
+    }
+    
+    if(copy_btn != null){
+        copy_btn.onclick = function(){
+            var r = document.createRange();
+            r.selectNode(document.getElementById('generated_url'));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(r);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+        };
+    }
+    </script>
+
+{% endblock %}
+
+

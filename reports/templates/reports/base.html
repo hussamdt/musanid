@@ -34,19 +34,20 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index' %}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'reports:index' %}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">Reports <sup>2</sup></div>
             </a>
 
+
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'overall' %}">
+                <a class="nav-link" href="{% url 'reports:overall' %}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -62,15 +63,25 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{% url 'list' %}">
+                <a class="nav-link collapsed" href="{% url 'reports:list' %}">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Reports</span>
                 </a>
                 
             </li>
 
+            {% if request.user.is_staff %}
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'reports:loader' %}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Reports Loader</span>
+                </a>
+                
+            </li>
+            {% endif %}
+
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">
+                <a class="nav-link" href="{% url 'home:home' %}">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Back to Home</span></a>
             </li>
@@ -159,15 +170,15 @@
                                 
 								{% for report in context.today_reports %}
 									
-									<a class="dropdown-item d-flex align-items-center" href="/reports/single/{{ report.id }}">
+									<a class="dropdown-item d-flex align-items-center" href="{% url 'reports:single-report' report.id %}">
 										<div class="mr-3">
 											<div class="icon-circle bg-primary">
 												<i class="fas fa-file-alt text-white"></i>
 											</div>
 										</div>
 										<div>
-											<div class="small text-gray-500">Priorty: {{ report.priorty }}</div>
-											<span class="font-weight-bold">{{ report.alert_type }}</span>
+											<div class="small text-gray-500">{{ report.created_at }}</div>
+											<span class="font-weight-bold">{{ report.report_name }}</span>
 										</div>
 									</a>
 									
@@ -234,7 +245,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Musanid 2021</span>
                     </div>
                 </div>
             </footer>
@@ -265,7 +276,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+                    <a class="btn btn-primary" href="{% url 'home:logout' %}">Logout</a>
                 </div>
             </div>
         </div>

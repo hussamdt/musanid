@@ -45,7 +45,7 @@ def contact(request):
     try:
         send_mail(subject, message, email, email_to, fail_silently=False)
         # send user to Thank you page (will be developed after server test)
-        return HttpResponse('Thank you, we will contact you soon.')
+        return render(request, 'home/thanks_page.html')
     except Exception as e:
         # Exception return temporarly for development purpose
         return HttpResponse('Server Eror '+ str(e))
@@ -62,14 +62,14 @@ def login_view(request):
     
     if user is not None:
         login(request, user)
-        return redirect('home')
+        return redirect('/')
     else:
         return render(request, 'home/login.html', {'message': 'wrong username or password'})
     
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('/login')
 
 
 

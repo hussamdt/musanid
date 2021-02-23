@@ -7,50 +7,45 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Reports</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Alert Name</th>
-                                            <th>Priorty</th>
-                                            <th>Malware Family</th>
-                                            <th>Http Hostname</th>
-                                            <th>Country</th>
+                                            <th>#</th>
+                                            <th>Report</th>
                                             <th>Time</th>
+                                            <th>Alerts</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Alert Name</th>
-                                            <th>Priorty</th>
-                                            <th>Malware Family</th>
-                                            <th>Http Hostname</th>
-                                            <th>Country</th>
+                                            <th>#</th>
+                                            <th>Report</th>
                                             <th>Time</th>
+                                            <th>Alerts</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     {% for report in reports %}
 										
 										<tr>
-                                            <td><a href="single/{{report.id}}"> {{ report.alert_name }} </a></td>
-                                            <td>{{ report.priorty }}</td>
-                                            <td>{{ report.malaware_family }}</td>
-                                            <td>{{ report.http_hostname }}</td>
-                                            <td>{{ report.src_country }}</td>
-                                            <td>{{ report.time }}</td>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td><a href="{% url 'reports:single-report' report.id %}"> {{ report.report_name }} </a></td>
+                                            <td>{{ report.created_at }}</td>
+                                            <td>{{ report.alert_set.count }}</td>
                                         </tr>
+                                        {% empty %}
+                                        <p class="text-center">You have no reports yet</p>
 									{% endfor %}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-					
-
+                        
 {% endblock %}
 
 

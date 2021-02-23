@@ -1,0 +1,50 @@
+{% extends 'reports/base.html' %}
+
+{% block 'content' %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card">
+                <h3 class="border-bottom p-3">Loader Stats</h3>
+                <div class="card-body">
+                    <h6>Status:
+                        {% if context.loader_status %}
+                        <span class="badge badge-success bg-success p-2">On</span>
+                        <a href="{% url 'reports:stop-loader' %}" id ="action_btn" class="btn btn-sm btn-outline-danger-0 text-danger">stop</a>
+                        
+                        {% else %}
+                        <span class="badge badge-danger bg-danger p-2">Off</span>
+                        <a href="{% url 'reports:start-loader' %}" id ="action_btn" class="btn btn-sm btn-outline-success-0 text-success">start</a>
+                        {% endif %}
+                    </h6>
+                    <h6>Last check: {{ context.last_check }}</h6>
+                    <h6>Next check: {{ context.next_check }}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="min-height: 400px;">
+        <div class="col-4">
+            <div class="card shadow-sm">
+                <h5 class="border-bottom card-header">Loaded Reports</h5>
+                <ul class="list-group list-group-flush">
+                    {% for loaded_report in context.loaded_reports %}
+                    <li class="list-group-item">{{ loaded_report }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class=" card shadow-sm">
+                <h5 class="card-header">Auto loader Logs</h5>
+                <ul class="list-group list-group-flush">
+                    {% for log in context.logs %}
+                    <li class="list-group-item">{{ log }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

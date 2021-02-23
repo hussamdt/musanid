@@ -23,7 +23,7 @@
                 <span>Sign In</span>
 				<p class="text-danger mt-1"><strong>{{ message }}</strong></p>
               </div>
-              <form role="form" action="/login/" method="post">
+              <form role="form" action="{% url 'home:login' %}" method="post">
 				{% csrf_token %}
                 <div class="form-group mb-3">
                   <div class="input-group input-group-alternative">

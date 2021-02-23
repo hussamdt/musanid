@@ -1,0 +1,259 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Reporter - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'reports/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'reports/css/sb-admin-2.min.css' %}" rel="stylesheet">
+	
+	<link href="{% static 'reports/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+	
+</head>
+
+<body id="page-top">
+    <div class="container mb-3 pt-5">
+        <div class="row">
+                     
+            <div class="col-10 text-right">			
+                
+                <a href="{% url 'reports:pdf-by-generated-url' alert.report.generated_url alert.id %}?download=true" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download as PDF</a>
+			    <a href="{% url 'reports:pdf-by-generated-url' alert.report.generated_url alert.id %}?download=false" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-eye fa-sm text-white-50"></i> View as PDF</a>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Collapsable Card -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Accordion -->
+            <a href="#AlertInfo" class="d-block card-header py-3" data-toggle="collapse"
+                role="button" aria-expanded="true" aria-controls="AlertInfo">
+                <h6 class="m-0 font-weight-bold text-primary">Alert Information</h6>
+            </a>
+            <!-- Card Content - Collapse -->
+            <div class="collapse show" id="AlertInfo">
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Alert Type</th>
+                                <td>{{ alert.alert_type }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Alert Name</th>
+                                <td>{{ alert.alert_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Priorty</th>
+                                <td>{{ alert.priorty }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Malaware Family</th>
+                                <td>{{ alert.malaware_family }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Time</th>
+                                <td>{{ alert.time }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">HTTP Hostname</th>
+                                <td>{{ alert.http_hostname }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Reference URL</th>
+                                <td>{{ alert.reference_url }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Collapsable Card -->
+        
+        
+        <!-- Collapsable Card -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Accordion -->
+            <a href="#SourceInformation" class="d-block card-header py-3" data-toggle="collapse"
+                role="button" aria-expanded="true" aria-controls="SourceInformation">
+                <h6 class="m-0 font-weight-bold text-primary">Source Information</h6>
+            </a>
+            <!-- Card Content - Collapse -->
+            <div class="collapse show" id="SourceInformation">
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Attack Reference</th>
+                                <td>{{ alert.attack_reference }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Source Hostname</th>
+                                <td>{{ alert.src_hostname }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Source IP Address</th>
+                                <td>{{ alert.src_ip }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Source Country</th>
+                                <td>{{ alert.src_country }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Collapsable Card -->
+        
+        
+        <!-- Collapsable Card -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Accordion -->
+            <a href="#DestinationInformation" class="d-block card-header py-3" data-toggle="collapse"
+                role="button" aria-expanded="true" aria-controls="DestinationInformation">
+                <h6 class="m-0 font-weight-bold text-primary">Destination Information</h6>
+            </a>
+            <!-- Card Content - Collapse -->
+            <div class="collapse show" id="DestinationInformation">
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Destination IP Address</th>
+                                <td>{{ alert.dst_ip }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Destination Country</th>
+                                <td>{{ alert.dst_country }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Destination Hostname</th>
+                                <td>{{ alert.dst_hostname }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Collapsable Card -->
+        
+        
+        
+        <!-- Collapsable Card -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Accordion -->
+            <a href="#Recommendation" class="d-block card-header py-3" data-toggle="collapse"
+                role="button" aria-expanded="true" aria-controls="Recommendation">
+                <h6 class="m-0 font-weight-bold text-primary">Recommendation & Description</h6>
+            </a>
+            <!-- Card Content - Collapse -->
+            <div class="collapse show" id="Recommendation">
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Recommendation</th>
+                                <td><p>{{ alert.recommendation|linebreaksbr }}</p></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Description</th>
+                                <td><p> {{ alert.description|linebreaksbr }} </p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Collapsable Card -->
+        
+        
+        
+        <!-- Collapsable Card -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Accordion -->
+            <a href="#Others" class="d-block card-header py-3" data-toggle="collapse"
+                role="button" aria-expanded="true" aria-controls="Others">
+                <h6 class="m-0 font-weight-bold text-primary">Others</h6>
+            </a>
+            <!-- Card Content - Collapse -->
+            <div class="collapse show" id="Others">
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Other TLS subject</th>
+                                <td>{{ alert.other_tls_subject }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Other TLS fingerprint</th>
+                                <td>{{ alert.other_tls_fingerprint }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Other username</th>
+                                <td>{{ alert.other_username }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Other source NT domain</th>
+                                <td>{{ alert.other_source_nt_domain }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Other destination asset</th>
+                                <td>{{ alert.other_destination_asset }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="bg-light" style="width:17%;">Other</th>
+                                <td>{{ alert.other }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Collapsable Card -->
+        
+        
+    </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'reports/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'reports/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'reports/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'reports/js/sb-admin-2.min.js' %}"></script>
+	
+	<!-- dataTable scripts -->
+	<script src="{% static 'reports/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+	<script src="{% static 'reports/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+	<!-- <script src="{% static 'reports/js/demo/datatables-demo.js' %}"></script> -->
+
+</body>
+
+</html>

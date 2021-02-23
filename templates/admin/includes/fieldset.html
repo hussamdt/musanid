@@ -28,31 +28,3 @@
         </div>
     {% endfor %}
 </fieldset>
-
-<script>
-
-textarea = document.getElementById("id_content");
-content = textarea.value;
-
-var edited_content = content;
-
-new_content = content.replace(/<br>/g, '\n');
-textarea.value = new_content;
-
-
-
-textarea.oninput = function(){
-	
-	edited_content = this.value.replace(/\n/g,'<br>');
-}
-
-textarea.onchange = function(){
-	console.log(edited_content);
-}
-
-document.getElementById('article_form').onsubmit = function(){
-	textarea.value = edited_content;
-}
-
-
-</script>

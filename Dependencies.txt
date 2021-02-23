@@ -4,3 +4,5 @@
 
 - Django (latest version)
 - psycopg2 (postgres backend module)
+- xhtml2pdf
+- pandas

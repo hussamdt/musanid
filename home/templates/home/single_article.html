@@ -32,7 +32,7 @@
         <hr>
 
         <!-- Post Content -->
-        <p>{{ article.content|safe|escape }}</p>
+        <p>{{ article.content|safe|linebreaksbr }}</p>
 
         <hr>
 	</div>
@@ -40,9 +40,9 @@
 		{# {% include './includes/comments_section.html' %} #}
 	{% endblock %}
 
-
+  
 	{% block 'sidebar'%}
-		{% include './includes/side_bar.html' %}
+		{# {% include './includes/side_bar.html' %} #}
 	{% endblock %}
 	
     </div>
