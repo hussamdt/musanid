@@ -20394,6 +20394,7 @@ textarea[resize="horizontal"] {
   position: relative;
   padding-top: 4rem;
   padding-bottom: 4rem;
+  
 }
 
 .section-xl {
@@ -20413,7 +20414,7 @@ textarea[resize="horizontal"] {
 
 @media (min-width: 768px) {
   .section-hero {
-    min-height: 500px;
+    min-height: 252px;
   }
 }
 
@@ -20493,28 +20494,34 @@ textarea[resize="horizontal"] {
   background: #1fa2ff;
 }
 
+/*background: linear-gradient(150deg, #7795f8 15%, #6772e5 70%, #555abf 94%);*/
 .section-shaped .shape-default {
-  background: linear-gradient(150deg, #7795f8 15%, #6772e5 70%, #555abf 94%);
+  background: linear-gradient(150deg, #72bec0 15%, #4e9ea0 70%, #338c8e 94%);
 }
 
+/* background: #7795f8; */
 .section-shaped .shape-default :nth-child(1) {
-  background: #7795f8;
+  background: #72bec0;
 }
 
+/* background: #7b9aff; */
 .section-shaped .shape-default :nth-child(2) {
-  background: #7b9aff;
+  background: #79bec0;
 }
 
+/* background: #6f8ff8; */
 .section-shaped .shape-default :nth-child(3) {
-  background: #6f8ff8;
+  background: #6bbec0;
 }
 
+/* background: #76eea7; */
 .section-shaped .shape-default :nth-child(4) {
-  background: #76eea7;
+  background: #55b5ff;
 }
 
+/* background: #6adaff; */
 .section-shaped .shape-default :nth-child(5) {
-  background: #6adaff;
+  background: #55b5ff;
 }
 
 .section-shaped .shape-light {
@@ -20740,11 +20747,11 @@ textarea[resize="horizontal"] {
 }
 
 .section-shaped .shape-style-3 span {
-  height: 140px;
+  height: 84px;
 }
 
 .section-shaped .shape-style-3 .span-sm {
-  height: 100px;
+  height: 60px;
 }
 
 .section-shaped .shape-style-3 :nth-child(1) {
@@ -20780,7 +20787,7 @@ textarea[resize="horizontal"] {
 
 @media (max-width: 991.98px) {
   .section-shaped .shape-style-3 span {
-    height: 120px;
+    height: 100px;
   }
 }
 

@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from .forms import ContactForm
+from django.conf import Settings
 
 
 #@login_required()
@@ -37,10 +38,11 @@ def contact(request):
     if not form.is_valid():
         return render(request, 'home/contact.html', {'form': form})
     
+    #email_to = Settings.email
     subject = form.cleaned_data['subject']
     message = form.cleaned_data['message']
     email = form.cleaned_data['email']
-    email_to = ['test@example.com']
+    email_to = ['faisal.almansour@musanid.com', 'almogbil.f@musanid.com']
     
     try:
         send_mail(subject, message, email, email_to, fail_silently=False)
@@ -48,7 +50,7 @@ def contact(request):
         return render(request, 'home/thanks_page.html')
     except Exception as e:
         # Exception return temporarly for development purpose
-        return HttpResponse('Server Eror '+ str(e))
+        return HttpResponse(f'Server Eror {str(e)} <br><br> <button onclick="window.history.back()">Back</button>')
     
 
 
