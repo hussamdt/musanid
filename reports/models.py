@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class Report(models.Model):
     report_name     = models.CharField('Report Name', max_length=100)
-    created_at       = models.DateTimeField('Time', default=timezone.now)
+    created_at       = models.DateTimeField('Time', auto_now_add=True)
     created_by      = models.CharField('Created By', max_length=100)
 
     # generated URL

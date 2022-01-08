@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     
     'home',
     'reports',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -110,6 +111,7 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -154,3 +156,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS =[
     BASE_DIR / 'static',
 ]
+
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'

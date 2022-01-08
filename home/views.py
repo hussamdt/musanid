@@ -39,11 +39,11 @@ def contact(request):
         return render(request, 'home/contact.html', {'form': form})
     
     #email_to = Settings.email
-    subject = form.cleaned_data['subject']
-    message = form.cleaned_data['message']
+    subject = f"{form.cleaned_data['email']} querying {form.cleaned_data['subject']} service"
+    message = f"You have new query from:\n Name: {form.cleaned_data['name']}\n Email: {form.cleaned_data['email']}\n Message:\n {form.cleaned_data['message']}"
     email = form.cleaned_data['email']
     email_to = ['faisal.almansour@musanid.com', 'almogbil.f@musanid.com']
-    
+
     try:
         send_mail(subject, message, email, email_to, fail_silently=False)
         # send user to Thank you page (will be developed after server test)
@@ -51,7 +51,6 @@ def contact(request):
     except Exception as e:
         # Exception return temporarly for development purpose
         return HttpResponse(f'Server Eror {str(e)} <br><br> <button onclick="window.history.back()">Back</button>')
-    
 
 
 def login_view(request):
